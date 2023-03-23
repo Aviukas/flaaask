@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>{{ group.name }}</h1>
+    <h2>Members</h2>
+    <ul>
+        {% for user in group.users %}
+            <li>{{ user.username }}</li>
+        {% endfor %}
+    </ul>
+    <h2>Bills</h2>
+    <ul>
+        {% for bill in group.bills %}
+            <li>{{ bill.description }} - {{ bill.amount }} - Paid by: {{ bill.payer.username }}</li>
+        {% endfor %}
+    </ul>
+    <form method="POST" action="">
+        {{ bill_form.hidden_tag() }}
+        {{ bill_form.description.label }} {{ bill_form.description }}
+        {{ bill_form.amount.label }} {{ bill_form.amount }}
+        {{ bill_form.payer_id.label }} {{ bill_form.payer_id }}
+        {{ bill_form.submit }}
+    </form>
+{% endblock %}

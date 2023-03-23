@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>Welcome, {{ current_user.username }}!</h1>
+    <h2>Your Groups</h2>
+    <ul>
+        {% for group in current_user.groups %}
+            <li><a href="{{ url_for('group', group_id=group.id) }}">{{ group.name }}</a></li>
+        {% endfor %}
+    </ul>
+    <form method="POST" action="">
+        {{ group_form.hidden_tag() }}
+        {{ group_form.name.label }} {{ group_form.name }}
+        {{ group_form.submit }}
+    </form>
+{% endblock %}
